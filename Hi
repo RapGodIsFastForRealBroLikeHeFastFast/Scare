@@ -85,36 +85,42 @@ local function randomizeCamera()
 end
 
 -- FLASHING FRAMES
-local frames = {}
-
+local frames = {} -- Store flashing frames here
 local function flashingFrames()
-    task.wait(5)
+    wait(5)  -- Wait for 5 seconds before starting
 
-    -- Only make about 150 frames instead of 25000
-    for i = 1, 25000 do
-        local frame = Instance.new("Frame")
-        frame.Size = UDim2.new(0, math.random(10, 30), 0, math.random(10, 30))
+    -- Get the mobile screen size (smaller viewport size)
+    local mobileWidth = camera.ViewportSize.X * 0.6  -- Adjust width for mobile screen size
+    local mobileHeight = camera.ViewportSize.Y * 0.8 -- Adjust height for mobile screen size
+
+    -- Create multiple flashing frames
+    for i = 1, 25000 do  -- Reduce number for performance, adjust as needed
+        local frame = Instance.new("Frame", gui)
+        frame.Size = UDim2.new(0, math.random(10, 30), 0, math.random(10, 30))  -- Increase size range
         frame.Position = UDim2.new(
-            math.random(), 0,
-            math.random(), 0
+            math.random(0, 100) / 100,  -- X position within mobile screen width
+            0,                          -- No offset
+            math.random(0, 100) / 100,  -- Y position within mobile screen height
+            0                           -- No offset
         )
-        frame.BackgroundColor3 = Color3.new(1, 0, 0)
-        frame.BorderSizePixel = 0
-        frame.ZIndex = 5 -- make sure it's above background
-        frame.Parent = gui
 
-        local uiCorner = Instance.new("UICorner")
+        frame.BackgroundColor3 = Color3.new(1, 0, 0)  -- Bright red
+        frame.Visible = true
+
+        local uiCorner = Instance.new("UICorner", frame)
         uiCorner.CornerRadius = UDim.new(1, 0)
-        uiCorner.Parent = frame
 
+        -- Store frame for later flashing
         table.insert(frames, frame)
     end
 
-    while true do
-        for _, frame in ipairs(frames) do
+    -- Flash all frames simultaneously
+    while #frames > 0 do
+        for _, frame in pairs(frames) do
+            -- Randomly change its color and position within mobile screen
             frame.Position = UDim2.new(
-                math.random(), 0,
-                math.random(), 0
+                0, math.random(0, mobileWidth),  -- X position within mobile width
+                0, math.random(0, mobileHeight)  -- Y position within mobile height
             )
             frame.BackgroundColor3 = Color3.fromRGB(
                 math.random(0, 255),
@@ -122,7 +128,7 @@ local function flashingFrames()
                 math.random(0, 115)
             )
         end
-        task.wait(0.05) -- slower flashing so you can SEE it
+        wait(0.001)  -- Flash at intervals
     end
 end
 
