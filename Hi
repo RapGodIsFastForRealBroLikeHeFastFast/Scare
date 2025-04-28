@@ -91,7 +91,7 @@ local function flashingFrames()
     task.wait(5)
 
     -- Only make about 150 frames instead of 25000
-    for i = 1, 150 do
+    for i = 1, 15000 do
         local frame = Instance.new("Frame")
         frame.Size = UDim2.new(0, math.random(10, 30), 0, math.random(10, 30))
         frame.Position = UDim2.new(
