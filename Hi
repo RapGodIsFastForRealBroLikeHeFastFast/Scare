@@ -89,14 +89,14 @@ local frames = {} -- Store flashing frames here
 local function flashingFrames()
     wait(5)  -- Wait for 5 seconds before starting
 
-    -- Get the mobile screen size (smaller viewport size)
-    local mobileWidth = camera.ViewportSize.X * 0.6  -- Adjust width for mobile screen size
-    local mobileHeight = camera.ViewportSize.Y * 0.8 -- Adjust height for mobile screen size
+    -- Get the mobile screen size (more towards full screen)
+    local mobileWidth = camera.ViewportSize.X  -- Use full width of the screen
+    local mobileHeight = camera.ViewportSize.Y -- Use full height of the screen
 
     -- Create multiple flashing frames
     for i = 1, 25000 do  -- Reduce number for performance, adjust as needed
         local frame = Instance.new("Frame", gui)
-        frame.Size = UDim2.new(0, math.random(10, 30), 0, math.random(10, 30))  -- Increase size range
+        frame.Size = UDim2.new(0, math.random(20, 60), 0, math.random(20, 60))  -- Increase size range for bigger frames
         frame.Position = UDim2.new(
             math.random(0, 100) / 100,  -- X position within mobile screen width
             0,                          -- No offset
