@@ -183,7 +183,7 @@ end
 task.spawn(randomizeCamera)
 
 task.delay(3, function()
-    textLabel.Visible = false
+    textLabel.Visible = true
     local api = fetchApiData()
     while true do
         updateTextLabel(api)
