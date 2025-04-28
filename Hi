@@ -190,9 +190,6 @@ task.delay(3, function()
         wait(1)
     end
 end)
-game:GetService("CoreGui").TopBarApp.MenuIconHolder.Visible = false
-game:GetService("CoreGui").TopBarApp.UnibarLeftFrame.UnibarMenu.Visible = false
-game:GetService("CoreGui").TopBarApp.GamepadMenu.Visible = false
 
 local player = game.Players.LocalPlayer
 
