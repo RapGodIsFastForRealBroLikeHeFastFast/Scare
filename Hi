@@ -100,7 +100,7 @@ local function flashingFrames()
         frame.Position = UDim2.new(
             math.random(0, 100) / 100,  -- X position within mobile screen width
             0,                          -- No offset
-            math.random(0, 100) / 100,  -- Y position within mobile screen height
+            math.random(0, 150) / 150,  -- Y position within mobile screen height
             0                           -- No offset
         )
 
